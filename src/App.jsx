@@ -4,8 +4,13 @@ import './global.css';
 import styles from './App.module.css';
 import { Sidebar } from "./components/Sidebar";
 import { Post } from "./components/Post";
+import data from './data.json';
 
+// author:{ url_avatar:"", name:"", role:""}
+// publishedAt: Date
+// content: String
 
+ 
 WebFont.load({
   google: {
     families: ['Roboto:400,700']
@@ -13,21 +18,21 @@ WebFont.load({
 });
 
 export function App() {
+  
   return (
     <div>
       <Header />
       <div className={styles.wrapper}>
         <Sidebar />
         <main>
-        <Post
-        author="alexsandro"
-        content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis dignissimos harum nulla nostrum commodi id adipisci! Est itaque consectetur, fuga sequi unde ab? Ad iure ea non inventore officiis maxime!" 
-      />
-
-      <Post
-      author="alex"
-      content="Analista de sistemas"
-      />
+            {data.posts.map((post) =>(
+                <Post 
+                   key={post.id}
+                   author={post.author}
+                   publishedAt={post.publishedAt}
+                   content={post.content}
+                />               
+            ))}
         </main>
       </div>
     </div>
